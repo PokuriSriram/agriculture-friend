@@ -2,41 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Plant Disease Detection Design System */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Plant-themed color palette */
+    --background: 120 100% 97%;  /* Honeydew #F0FFF0 */
+    --foreground: 140 25% 20%;   /* Deep Forest Green */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100% / 0.8;     /* White with transparency for glass */
+    --card-foreground: 140 25% 20%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100% / 0.9;
+    --popover-foreground: 140 25% 20%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 140 28% 27%;      /* Deep Green #2E5339 */
+    --primary-foreground: 120 100% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 120 50% 85%;    /* Light Green */
+    --secondary-foreground: 140 25% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 120 30% 90%;
+    --muted-foreground: 140 15% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 15 74% 54%;        /* Terracotta #D95D39 */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 74% 54%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 120 20% 85% / 0.3;
+    --input: 0 0% 100% / 0.9;
+    --ring: 140 28% 27%;
 
-    --radius: 0.5rem;
+    --radius: 20px;
+
+    /* Glassmorphism variables */
+    --glass-bg: 255 255 255 / 0.8;
+    --glass-border: 255 255 255 / 0.25;
+    --glass-blur: 12px;
+
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(140 35% 35%));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(25 74% 60%));
+    --gradient-bg: linear-gradient(135deg, hsl(120 100% 97%), hsl(140 50% 93%));
+    --gradient-glass: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.9), 
+      rgba(255, 255, 255, 0.7)
+    );
+
+    /* Shadows */
+    --shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.15);
+    --shadow-hover: 0 15px 35px rgba(31, 38, 135, 0.2);
+    --shadow-accent: 0 10px 30px hsl(var(--accent) / 0.3);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +124,129 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-poppins;
+    background: var(--gradient-bg);
+    min-height: 100vh;
   }
+}
+
+@layer components {
+  /* Glassmorphism Card Component */
+  .glass-card {
+    background: rgba(var(--glass-bg));
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid rgba(var(--glass-border));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-glass);
+    transition: var(--transition-smooth);
+  }
+
+  .glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Smooth Animations */
+  .fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  /* Navigation Active State */
+  .nav-active {
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    transform: scale(1.05);
+  }
+
+  /* Loading Spinner */
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(var(--primary) / 0.3);
+    border-top: 4px solid hsl(var(--primary));
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  /* Scrollbar Styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(var(--glass-bg));
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent));
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-gradient {
+    background: var(--gradient-primary);
+    transition: var(--transition-smooth);
+  }
+
+  .btn-gradient:hover {
+    background: var(--gradient-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-accent);
+  }
+
+  .glass-border {
+    border: 1px solid rgba(var(--glass-border));
+  }
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(60px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
 }
