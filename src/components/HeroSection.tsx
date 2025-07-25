@@ -32,16 +32,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({ translations }) => {
             </div>
 
             {/* Features */}
-            <div className="grid sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-6 max-w-md mx-auto">
               {[
                 { icon: Zap, title: translations.hero?.features?.instant || 'Instant', desc: translations.hero?.features?.instantDesc || 'AI Analysis' },
                 { icon: Shield, title: translations.hero?.features?.accurate || 'Accurate', desc: translations.hero?.features?.accurateDesc || '95% Precision' },
                 { icon: Globe, title: translations.hero?.features?.multilingual || 'Multilingual', desc: translations.hero?.features?.multilingualDesc || 'Support' }
               ].map((feature, index) => (
-                <div key={index} className="glass-card p-4 text-center scale-in" style={{ animationDelay: `${index * 0.2}s` }}>
-                  <feature.icon className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <h3 className="font-semibold text-foreground">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                <div key={index} className="glass-card p-4 text-center scale-in flex flex-col items-center justify-center min-h-[120px]" style={{ animationDelay: `${index * 0.2}s` }}>
+                  <feature.icon className="w-10 h-10 text-primary mx-auto mb-3" />
+                  <h3 className="font-semibold text-foreground text-sm">{feature.title}</h3>
+                  <p className="text-xs text-muted-foreground mt-1">{feature.desc}</p>
                 </div>
               ))}
             </div>
