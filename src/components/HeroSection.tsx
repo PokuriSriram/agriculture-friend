@@ -55,30 +55,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ translations }) => {
               <span>{translations.hero?.cta || 'Start Diagnosis'}</span>
             </button>
           </div>
-
-          {/* Right Content - Floating Cards Preview */}
-          <div className="relative h-96 lg:h-[500px] slide-up">
-            {/* Floating Plant Icon */}
-            <div className="absolute top-10 right-10 glass-card p-6 float-animation">
-              <Leaf className="w-12 h-12 text-primary" />
-            </div>
-            
-            {/* Stats Card */}
-            <div className="absolute bottom-20 left-10 glass-card p-6 float-animation" style={{ animationDelay: '1s' }}>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary">95%</div>
-                <div className="text-sm text-muted-foreground">{translations.hero?.accuracy || 'Accuracy'}</div>
-              </div>
-            </div>
-
-            {/* Detection Count */}
-            <div className="absolute top-32 left-16 glass-card p-4 float-animation" style={{ animationDelay: '2s' }}>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-accent">10K+</div>
-                <div className="text-xs text-muted-foreground">{translations.hero?.detections || 'Detections'}</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
